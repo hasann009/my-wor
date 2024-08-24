@@ -1,37 +1,28 @@
 {
-  "name": "My YT Bookmarks",
-  "version": "0.1.0",
-  "description": "Saving timestamps in YT videos",
-  "permissions": ["storage", "tabs"],
-  "host_permissions": ["https://*.youtube.com/*"],
+  "manifest_version": 3,
+  "name": "Area Screenshot Extension",
+  "version": "1.0",
+  "description": "Takes periodic screenshots of a user-defined area of the page and saves them to the Downloads folder.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "downloads"
+  ],
   "background": {
     "service_worker": "background.js"
   },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/screenshot16.png",
+      "48": "icons/screenshot48.png",
+      "128": "icons/screenshot128.png"
+    }
+  },
   "content_scripts": [
     {
-      "matches": ["https://*.youtube.com/*"],
-      "js": ["contentScript.js"]
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
     }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "assets/bookmark.png",
-        "assets/play.png",
-        "assets/delete.png",
-        "assets/save.png"
-      ],
-      "matches": ["https://*.youtube.com/*"]
-    }
-  ],
-  "action": {
-    "default_icon": {
-      "16": "assets/ext-icon.png",
-      "24": "assets/ext-icon.png",
-      "32": "assets/ext-icon.png"
-    },
-    "default_title": "My YT Bookmarks",
-    "default_popup": "popup.html"
-  },
-  "manifest_version": 3
+  ]
 }
